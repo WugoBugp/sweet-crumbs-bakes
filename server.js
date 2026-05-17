@@ -6,7 +6,7 @@ import Stripe from "stripe"
 dotenv.config()
 
 const app = express()
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 app.use(cors())
 app.use(express.json())
