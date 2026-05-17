@@ -4,6 +4,7 @@ export default function OrderSummary({
   selectedFrosting,
   totalPrice,
   totalCalories,
+  selectedProductType,
 }) {
   return (
     <div className="bg-stone-900 text-white rounded-[2rem] p-10 shadow-2xl flex flex-col">
@@ -13,6 +14,10 @@ export default function OrderSummary({
 
       <div className="space-y-6 mb-10">
         <div className="bg-stone-800 rounded-2xl p-6">
+            <div className="bg-stone-800 rounded-2xl p-6">
+  <p className="text-stone-400 mb-2">Product Type</p>
+  <p className="text-2xl font-black">{selectedProductType.name}</p>
+</div>
           <p className="text-stone-400 mb-2">Cookie Base</p>
           <p className="text-2xl font-black">{selectedBase.name}</p>
         </div>
