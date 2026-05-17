@@ -27,6 +27,12 @@ const removeFromCart = (indexToRemove) => {
   Cart: {cartItems.length}
 </button>
 {cartOpen && (
+  <div
+    className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300"
+    onClick={() => setCartOpen(false)}
+  />
+)}
+  {cartOpen && (
   <div className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 p-6 overflow-y-auto transform transition-transform duration-300 ease-out translate-x-0">
     <div className="bg-white w-full max-w-md h-full p-6 shadow-2xl overflow-y-auto">
       <div className="flex justify-between items-center mb-6">
@@ -82,8 +88,8 @@ const removeFromCart = (indexToRemove) => {
       )}
     </div>
   </div>
-)}
 
+)}
       <Hero />
       <FeaturedProducts addToCart={addToCart} />
       <MenuCategories />
