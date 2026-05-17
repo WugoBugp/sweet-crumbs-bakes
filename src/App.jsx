@@ -6,11 +6,13 @@ import MenuCategories from "./Components/MenuCategories"
 import SixPackBanner from "./Components/SixPackBanner"
 import CookieBuilder from "./Components/CookieBuilder"
 import Footer from "./Components/Footer"
+import OrderConfirmation from "./Components/OrderConfirmation"
 
 export default function App() {
   const [cartItems, setCartItems] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
+  const [order, setOrder] = useState(null)
 
   const addToCart = (item) => {
     setCartItems((currentItems) => [...currentItems, item])
@@ -41,7 +43,7 @@ const removeFromCart = (indexToRemove) => {
       onClick={() => setCartOpen(false)}
     />
 
-    <div className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 p-6 overflow-y-auto">
+    <div className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 p-6 overflow-y-auto transition-transform duration-300">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-black">Your Cart</h2>
 
@@ -120,12 +122,23 @@ const removeFromCart = (indexToRemove) => {
 {showCheckout && (
   <div id="checkout">
     <CheckoutForm
-      cartItems={cartItems}
-      setCartItems={setCartItems}
-    />
+  cartItems={cartItems}
+  setCartItems={setCartItems}
+  setOrder={setOrder}
+  setShowCheckout={setShowCheckout}
+/>
   </div>
 )}
-
+{order && (
+  <OrderConfirmation
+    order={order}
+    onBackToMenu={() => {
+      setOrder(null)
+      setShowCheckout(false)
+      window.scrollTo({ top: 0, behavior: "smooth" })
+    }}
+  />
+)}
 <Footer />
     </div>
   )

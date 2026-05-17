@@ -1,15 +1,27 @@
 // Components/CheckoutForm.jsx
 
-export default function CheckoutForm({ cartItems, setCartItems }) {
+export default function CheckoutForm({ cartItems, setCartItems, setOrder, setShowCheckout }) {
   const total = cartItems.reduce((sum, item) => sum + item.price, 0)
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+  e.preventDefault()
 
-    alert("Order submitted! Thank you!")
+  const formData = new FormData(e.target)
 
-    setCartItems([])
+  const newOrder = {
+    orderNumber: Math.floor(100000 + Math.random() * 900000),
+    name: formData.get("name"),
+    contact: formData.get("contact"),
+    pickupTime: formData.get("pickupTime"),
+    instructions: formData.get("instructions"),
+    items: cartItems,
+    total: cartItems.reduce((sum, item) => sum + Number(item.price), 0),
   }
+
+  setOrder(newOrder)
+  setCartItems([])
+  setShowCheckout(false)
+}
 
   return (
     <div className="bg-white rounded-3xl shadow-xl p-6 max-w-xl mx-auto my-10">
@@ -30,16 +42,18 @@ export default function CheckoutForm({ cartItems, setCartItems }) {
           className="w-full border rounded-xl p-3"
         />
 
-        <input
-          type="datetime-local"
-          required
-          className="w-full border rounded-xl p-3"
-        />
+       <input
+  type="datetime-local"
+  name="pickupTime"
+  required
+  className="w-full border rounded-xl p-3"
+/>
 
-        <textarea
-          placeholder="Special instructions"
-          className="w-full border rounded-xl p-3"
-        />
+     <textarea
+  name="instructions"
+  placeholder="Special instructions (Optional)"
+  className="w-full border rounded-xl p-3"
+/>
 
         <div className="border-t pt-4">
           <p className="font-bold">Items: {cartItems.length}</p>
