@@ -23,7 +23,7 @@ export default function FeaturedProducts() {
           <div className="bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col">
 
             <img
-              src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1200&auto=format&fit=crop"
+             src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?q=80&w=1200&auto=format&fit=crop"
               alt="Chocolate Chip Cookies"
               className="h-72 w-full object-cover"
             />
@@ -97,7 +97,7 @@ export default function FeaturedProducts() {
           <div className="bg-stone-900 text-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col">
 
             <img
-              src="https://images.unsplash.com/photo-1576618148400-f54bed99fcfd?q=80&w=1200&auto=format&fit=crop"
+              src="https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?q=80&w=1200&auto=format&fit=crop"
               alt="Chocolate Peanut Butter Cookie"
               className="h-72 w-full object-cover"
             />
