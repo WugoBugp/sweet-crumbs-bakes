@@ -27,7 +27,7 @@ const removeFromCart = (indexToRemove) => {
   Cart: {cartItems.length}
 </button>
 {cartOpen && (
-  <div className="fixed inset-0 z-50 bg-black/50 flex justify-end">
+  <div className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 p-6 overflow-y-auto transform transition-transform duration-300 ease-out translate-x-0">
     <div className="bg-white w-full max-w-md h-full p-6 shadow-2xl overflow-y-auto">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-black">Your Cart</h2>
