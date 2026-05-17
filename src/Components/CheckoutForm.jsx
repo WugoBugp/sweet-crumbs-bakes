@@ -22,7 +22,7 @@ export default function CheckoutForm({ cartItems, setCartItems, setOrder, setSho
   0
 ),
 }
-const response = await fetch("http://localhost:4242/create-checkout-session", {
+const response = await fetch("https://sweet-crumbs-bakes.onrender.com/create-checkout-session", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
