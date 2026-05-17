@@ -91,15 +91,21 @@ const removeFromCart = (indexToRemove) => {
             </div>
           ))}
 
-          <button
-            onClick={() => {
-              setShowCheckout(true)
-              setCartOpen(false)
-            }}
-            className="w-full bg-stone-900 text-white py-3 rounded-2xl font-bold"
-          >
-            Checkout
-          </button>
+         <button
+  onClick={() => {
+    setShowCheckout(true)
+    setCartOpen(false)
+
+    setTimeout(() => {
+      document.getElementById("checkout")?.scrollIntoView({
+        behavior: "smooth",
+      })
+    }, 100)
+  }}
+  className="w-full bg-stone-900 text-white py-3 rounded-2xl font-bold"
+>
+  Checkout
+</button>
         </div>
       )}
     </div>
@@ -112,10 +118,12 @@ const removeFromCart = (indexToRemove) => {
 <CookieBuilder addToCart={addToCart} />
 
 {showCheckout && (
-  <CheckoutForm
-    cartItems={cartItems}
-    setCartItems={setCartItems}
-  />
+  <div id="checkout">
+    <CheckoutForm
+      cartItems={cartItems}
+      setCartItems={setCartItems}
+    />
+  </div>
 )}
 
 <Footer />
