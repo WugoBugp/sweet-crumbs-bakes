@@ -48,15 +48,15 @@ export default function OrderSummary({
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
         <div className="bg-orange-600 rounded-2xl p-6">
           <p className="text-orange-100 mb-2">Total Price</p>
-          <p className="text-4xl font-black">${totalPrice.toFixed(2)}</p>
+          <p className="text-3xl sm:text-4xl font-black break-words">${totalPrice.toFixed(2)}</p>
         </div>
 
         <div className="bg-stone-800 rounded-2xl p-6">
           <p className="text-stone-400 mb-2">Calories</p>
-          <p className="text-4xl font-black">{totalCalories}</p>
+          <p className="text-3xl sm:text-4xl font-black break-words">{totalCalories}</p>
         </div>
       </div>
 

@@ -13,7 +13,11 @@ export default function App() {
   const addToCart = (item) => {
     setCartItems((currentItems) => [...currentItems, item])
   }
-
+const removeFromCart = (indexToRemove) => {
+  setCartItems((currentItems) =>
+    currentItems.filter((item, index) => index !== indexToRemove)
+  )
+}
   return (
     <div className="bg-amber-50 min-h-screen">
       <button
@@ -66,6 +70,12 @@ export default function App() {
               <p className="font-black text-orange-600 mt-3">
                 ${Number(item.price).toFixed(2)}
               </p>
+              <button
+  onClick={() => removeFromCart(index)}
+  className="mt-3 w-full bg-red-100 hover:bg-red-200 text-red-700 py-2 rounded-xl font-bold transition"
+>
+  Remove
+</button>
             </div>
           ))}
         </div>
