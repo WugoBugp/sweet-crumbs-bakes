@@ -1,7 +1,7 @@
 import { useState } from "react"
 import OrderSummary from "./OrderSummary"
 
-export default function CookieBuilder() {
+export default function CookieBuilder({ addToCart }) {
   const cookieBases = [
     {
       name: "Chocolate",
@@ -283,13 +283,14 @@ const totalCalories = Math.round(
 
           </div>
 
-          <OrderSummary
+         <OrderSummary
   selectedBase={selectedBase}
   selectedProductType={selectedProductType}
   selectedToppings={selectedToppings}
   selectedFrosting={selectedFrosting}
   totalPrice={totalPrice}
   totalCalories={totalCalories}
+  addToCart={addToCart}
 />
       </div>
     </div>

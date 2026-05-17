@@ -5,6 +5,7 @@ export default function OrderSummary({
   totalPrice,
   totalCalories,
   selectedProductType,
+  addToCart,
 }) {
   return (
     <div className="bg-stone-900 text-white rounded-[2rem] p-10 shadow-2xl flex flex-col">
@@ -64,9 +65,20 @@ export default function OrderSummary({
         serving size, and ingredient brands.
       </p>
 
-      <button className="mt-auto w-full bg-orange-600 hover:bg-orange-700 text-white py-5 rounded-2xl font-black text-xl transition">
-        Add Custom Cookie To Order
-      </button>
+      <button
+  onClick={() =>
+    addToCart({
+      name: `${selectedProductType.name} - ${selectedBase.name}`,
+      toppings: selectedToppings.map((t) => t.name),
+      frosting: selectedFrosting?.name || "None",
+      price: totalPrice,
+      calories: totalCalories,
+    })
+  }
+  className="mt-auto w-full bg-orange-600 hover:bg-orange-700 text-white py-5 rounded-2xl font-black text-xl transition"
+>
+  Add Custom Cookie To Order
+</button>
     </div>
   )
 }

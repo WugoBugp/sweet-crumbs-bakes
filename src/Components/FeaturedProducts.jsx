@@ -1,4 +1,4 @@
-export default function FeaturedProducts() {
+export default function FeaturedProducts({ addToCart }) {
   return (
     <section
       id="menu"
@@ -86,10 +86,18 @@ export default function FeaturedProducts() {
                 Contains: Wheat, Eggs, Milk
               </div>
 
-              <button className="mt-auto w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-2xl font-bold text-lg transition">
-                Add To Order
-              </button>
-
+             <button
+  onClick={() =>
+    addToCart({
+      name: "Chocolate Chip Thins",
+      price: 1,
+      type: "Classic Cookie",
+    })
+  }
+  className="mt-auto w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-2xl font-bold text-lg transition"
+>
+  Add To Order
+</button>
             </div>
           </div>
 
@@ -161,9 +169,18 @@ export default function FeaturedProducts() {
                 Contains: Wheat, Eggs, Milk, Peanuts
               </div>
 
-              <button className="mt-auto w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-2xl font-bold text-lg transition">
-                Add To Order
-              </button>
+              <button
+  onClick={() =>
+    addToCart({
+      name: "Chocolate Peanut Butter Cookie",
+      price: 5,
+      type: "Gourmet Cookie",
+    })
+  }
+  className="mt-auto w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-2xl font-bold text-lg transition"
+>
+  Add To Order
+</button>
 
             </div>
           </div>
