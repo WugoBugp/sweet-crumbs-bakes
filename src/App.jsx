@@ -1,4 +1,5 @@
 import { useState } from "react"
+import CheckoutForm from "./Components/CheckoutForm"
 import Hero from "./Components/Hero"
 import FeaturedProducts from "./Components/FeaturedProducts"
 import MenuCategories from "./Components/MenuCategories"
@@ -9,6 +10,7 @@ import Footer from "./Components/Footer"
 export default function App() {
   const [cartItems, setCartItems] = useState([])
   const [cartOpen, setCartOpen] = useState(false)
+  const [showCheckout, setShowCheckout] = useState(false)
 
   const addToCart = (item) => {
     setCartItems((currentItems) => [...currentItems, item])
@@ -33,8 +35,13 @@ const removeFromCart = (indexToRemove) => {
   />
 )}
   {cartOpen && (
-  <div className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 p-6 overflow-y-auto transform transition-transform duration-300 ease-out translate-x-0">
-    <div className="bg-white w-full max-w-md h-full p-6 shadow-2xl overflow-y-auto">
+  <div>
+    <div
+      className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+      onClick={() => setCartOpen(false)}
+    />
+
+    <div className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 p-6 overflow-y-auto">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-black">Your Cart</h2>
 
@@ -57,9 +64,7 @@ const removeFromCart = (indexToRemove) => {
             >
               <h3 className="font-black text-lg">{item.name}</h3>
 
-              {item.type && (
-                <p className="text-stone-600">{item.type}</p>
-              )}
+              {item.type && <p className="text-stone-600">{item.type}</p>}
 
               {item.toppings && item.toppings.length > 0 && (
                 <p className="text-sm text-stone-500 mt-2">
@@ -76,26 +81,44 @@ const removeFromCart = (indexToRemove) => {
               <p className="font-black text-orange-600 mt-3">
                 ${Number(item.price).toFixed(2)}
               </p>
+
               <button
-  onClick={() => removeFromCart(index)}
-  className="mt-3 w-full bg-red-100 hover:bg-red-200 text-red-700 py-2 rounded-xl font-bold transition"
->
-  Remove
-</button>
+                onClick={() => removeFromCart(index)}
+                className="mt-3 w-full bg-red-100 hover:bg-red-200 text-red-700 py-2 rounded-xl font-bold transition"
+              >
+                Remove
+              </button>
             </div>
           ))}
+
+          <button
+            onClick={() => {
+              setShowCheckout(true)
+              setCartOpen(false)
+            }}
+            className="w-full bg-stone-900 text-white py-3 rounded-2xl font-bold"
+          >
+            Checkout
+          </button>
         </div>
       )}
     </div>
   </div>
-
 )}
       <Hero />
-      <FeaturedProducts addToCart={addToCart} />
-      <MenuCategories />
-      <SixPackBanner />
-      <CookieBuilder addToCart={addToCart} />
-      <Footer />
+<FeaturedProducts addToCart={addToCart} />
+<MenuCategories />
+<SixPackBanner />
+<CookieBuilder addToCart={addToCart} />
+
+{showCheckout && (
+  <CheckoutForm
+    cartItems={cartItems}
+    setCartItems={setCartItems}
+  />
+)}
+
+<Footer />
     </div>
   )
 }
