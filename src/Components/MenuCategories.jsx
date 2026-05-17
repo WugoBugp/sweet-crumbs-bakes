@@ -19,7 +19,7 @@ export default function MenuCategories() {
         <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-8">
 
           {/* Classic Cookies */}
-          <div className="bg-white rounded-[2rem] p-8 shadow-xl border border-orange-100">
+          <div className="bg-white rounded-[2rem] p-8 shadow-xl border border-orange-100 hover:-translate-y-2 transition-all duration-300">
 
             <div className="text-5xl mb-6">
               🍪
@@ -48,7 +48,7 @@ export default function MenuCategories() {
           </div>
 
           {/* Gourmet Cookies */}
-          <div className="bg-stone-900 text-white rounded-[2rem] p-8 shadow-2xl">
+          <div className="bg-stone-900 text-white rounded-[2rem] p-8 shadow-2xl hover:-translate-y-2 transition-all duration-300">
 
             <div className="text-5xl mb-6">
               🍫
@@ -77,7 +77,7 @@ export default function MenuCategories() {
           </div>
 
           {/* Cookie Cakes */}
-          <div className="bg-white rounded-[2rem] p-8 shadow-xl border border-orange-100">
+          <div className="bg-white rounded-[2rem] p-8 shadow-xl border border-orange-100 hover:-translate-y-2 transition-all duration-300">
 
             <div className="text-5xl mb-6">
               🎂
@@ -108,7 +108,7 @@ export default function MenuCategories() {
           {/* Build Your Own */}
           <div
             id="builder"
-            className="bg-gradient-to-br from-orange-500 to-orange-700 text-white rounded-[2rem] p-8 shadow-2xl"
+            className="bg-gradient-to-br from-orange-500 to-orange-700 text-white rounded-[2rem] p-8 shadow-2xl hover:-translate-y-2 transition-all duration-300"
           >
 
             <div className="text-5xl mb-6">

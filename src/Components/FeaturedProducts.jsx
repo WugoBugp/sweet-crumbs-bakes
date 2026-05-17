@@ -20,7 +20,7 @@ export default function FeaturedProducts({ addToCart }) {
         <div className="grid lg:grid-cols-2 gap-10">
 
           {/* Chocolate Chip Thins */}
-          <div className="bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col">
+          <div className="bg-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col hover:-translate-y-2 transition-all duration-300">
 
             <img
               src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1200&auto=format&fit=crop"
@@ -102,7 +102,7 @@ export default function FeaturedProducts({ addToCart }) {
           </div>
 
           {/* Chocolate Peanut Butter Cookie */}
-          <div className="bg-stone-900 text-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col">
+          <div className="bg-stone-900 text-white rounded-[2rem] overflow-hidden shadow-2xl flex flex-col hover:-translate-y-2 transition-all duration-300">
 
             <img
                src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=1200&auto=format&fit=crop"

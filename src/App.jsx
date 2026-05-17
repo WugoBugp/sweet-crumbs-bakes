@@ -7,6 +7,7 @@ import SixPackBanner from "./Components/SixPackBanner"
 import CookieBuilder from "./Components/CookieBuilder"
 import Footer from "./Components/Footer"
 import OrderConfirmation from "./Components/OrderConfirmation"
+import Navbar from "./Components/Navbar"
 
 export default function App() {
   const [cartItems, setCartItems] = useState(() => {
@@ -65,14 +66,11 @@ const decreaseQuantity = (indexToUpdate) => {
 }
   return (
     <div className="bg-amber-50 min-h-screen">
-      {!order && (
-  <button
-    onClick={() => setCartOpen(true)}
-    className="fixed top-6 right-6 z-50 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-xl font-bold"
-  >
-    Cart: {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-  </button>
-)}
+      <Navbar
+  cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+  onCartClick={() => setCartOpen(true)}
+/>
+      
 {cartOpen && (
   <div
     className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300"
@@ -86,7 +84,7 @@ const decreaseQuantity = (indexToUpdate) => {
       onClick={() => setCartOpen(false)}
     />
 
-    <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 p-6 overflow-y-auto transition-transform duration-300">
+    <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 p-6 overflow-y-auto transition-transform duration-300 translate-x-0">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-black">Your Cart</h2>
 
@@ -99,8 +97,16 @@ const decreaseQuantity = (indexToUpdate) => {
       </div>
 
       {cartItems.length === 0 ? (
-        <p className="text-stone-600">Your cart is empty.</p>
-      ) : (
+  <div className="text-center py-12">
+    <p className="text-5xl mb-4">🍪</p>
+    <p className="text-xl font-bold text-stone-900">
+      Your cart is empty
+    </p>
+    <p className="text-stone-500 mt-2">
+      Add some cookies to get started.
+    </p>
+  </div>
+) : (
         <div className="space-y-4">
           {cartItems.map((item, index) => (
             <div
@@ -155,6 +161,25 @@ const decreaseQuantity = (indexToUpdate) => {
 </button>
             </div>
           ))}
+          <div className="border-t pt-4 mt-6">
+  <div className="flex justify-between text-lg font-bold">
+    <span>Subtotal</span>
+    <span>
+      $
+      {cartItems
+        .reduce(
+          (sum, item) =>
+            sum + Number(item.price) * item.quantity,
+          0
+        )
+        .toFixed(2)}
+    </span>
+  </div>
+
+  <p className="text-sm text-stone-500 mt-1">
+    Taxes calculated at pickup.
+  </p>
+</div>
 
          <button
   onClick={() => {
@@ -169,7 +194,7 @@ const decreaseQuantity = (indexToUpdate) => {
   }}
   className="w-full bg-stone-900 text-white py-3 rounded-2xl font-bold"
 >
-  Checkout
+  Continue to Checkout
 </button>
         </div>
       )}
