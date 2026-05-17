@@ -104,24 +104,26 @@ export default function App() {
         </div>
       )}
 
-      {/* Smooth Cart Overlay + Drawer */}
-      <div
-        className={`fixed inset-0 z-40 transition-opacity duration-300 ${
-          cartOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-      >
-        <div
-          className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-          onClick={() => setCartOpen(false)}
-        />
+     {/* Smooth Cart Overlay + Drawer */}
+<div
+  className={`fixed inset-0 z-40 transition-all duration-500 ease-out ${
+    cartOpen
+      ? "opacity-100 pointer-events-auto"
+      : "opacity-0 pointer-events-none"
+  }`}
+>
+  <div
+    className={`absolute inset-0 bg-black/40 transition-transform duration-500 ease-out ${
+      cartOpen ? "translate-x-0" : "translate-x-full"
+    }`}
+    onClick={() => setCartOpen(false)}
+  />
 
-        <div
-          className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 p-6 overflow-y-auto transition-transform duration-300 ease-out ${
-            cartOpen ? "translate-x-0" : "translate-x-full"
-          }`}
-        >
+  <div
+    className={`fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 p-6 overflow-y-auto transition-transform duration-500 ease-out ${
+      cartOpen ? "translate-x-0" : "translate-x-full"
+    }`}
+  >
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-3xl font-black">Your Cart</h2>
 
