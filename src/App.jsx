@@ -17,10 +17,33 @@ export default function App() {
   const [cartOpen, setCartOpen] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
   const [order, setOrder] = useState(null)
+  const [paymentSuccess, setPaymentSuccess] = useState(false)
   useEffect(() => {
+    
+  localStorage.setItem("cartItems", JSON.stringify(cartItems))
+}, [cartItems])
+useEffect(() => {
   localStorage.setItem("cartItems", JSON.stringify(cartItems))
 }, [cartItems])
 
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search)
+
+  if (params.get("success")) {
+    setPaymentSuccess(true)
+    setTimeout(() => {
+  setPaymentSuccess(false)
+}, 5000)
+    setCartItems([])
+    localStorage.removeItem("cartItems")
+    window.history.replaceState({}, "", "/")
+  }
+
+  if (params.get("canceled")) {
+    alert("Payment canceled. Your cart is still saved.")
+    window.history.replaceState({}, "", "/")
+  }
+}, [])
  const addToCart = (item) => {
   setCartItems((currentItems) => {
     const existingItemIndex = currentItems.findIndex(
@@ -70,7 +93,11 @@ const decreaseQuantity = (indexToUpdate) => {
   cartCount={cartItems.reduce((sum, item) => sum + item.quantity, 0)}
   onCartClick={() => setCartOpen(true)}
 />
-      
+      {paymentSuccess && (
+  <div className="mx-4 sm:mx-auto mt-6 max-w-2xl bg-green-100 border border-green-300 text-green-800 rounded-2xl p-4 text-center font-bold">
+    Payment successful! Your order has been received.
+  </div>
+)}
 {cartOpen && (
   <div
     className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300"

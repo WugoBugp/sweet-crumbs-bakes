@@ -63,7 +63,7 @@ export default function Footer() {
 
           <div className="space-y-4">
             <p>
-              Tyler, Texas
+              Broaddus, Texas
             </p>
 
             <p>

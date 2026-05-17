@@ -5,7 +5,7 @@ export default function CheckoutForm({ cartItems, setCartItems, setOrder, setSho
   (sum, item) => sum + Number(item.price) * item.quantity,
   0
 )
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
   e.preventDefault()
 
   const formData = new FormData(e.target)
@@ -21,6 +21,23 @@ export default function CheckoutForm({ cartItems, setCartItems, setOrder, setSho
   (sum, item) => sum + Number(item.price) * item.quantity,
   0
 ),
+}
+const response = await fetch("http://localhost:4242/create-checkout-session", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({ cartItems }),
+})
+
+const data = await response.json()
+
+console.log(data)
+
+if (data.url) {
+  window.location.href = data.url
+} else {
+  alert(data.error || "Stripe checkout failed")
 }
   setOrder(newOrder)
   setCartItems([])
