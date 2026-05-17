@@ -22,6 +22,57 @@ export default function App() {
 >
   Cart: {cartItems.length}
 </button>
+{cartOpen && (
+  <div className="fixed inset-0 z-50 bg-black/50 flex justify-end">
+    <div className="bg-white w-full max-w-md h-full p-6 shadow-2xl overflow-y-auto">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-3xl font-black">Your Cart</h2>
+
+        <button
+          onClick={() => setCartOpen(false)}
+          className="text-3xl font-black"
+        >
+          ×
+        </button>
+      </div>
+
+      {cartItems.length === 0 ? (
+        <p className="text-stone-600">Your cart is empty.</p>
+      ) : (
+        <div className="space-y-4">
+          {cartItems.map((item, index) => (
+            <div
+              key={index}
+              className="border border-orange-100 rounded-2xl p-4"
+            >
+              <h3 className="font-black text-lg">{item.name}</h3>
+
+              {item.type && (
+                <p className="text-stone-600">{item.type}</p>
+              )}
+
+              {item.toppings && item.toppings.length > 0 && (
+                <p className="text-sm text-stone-500 mt-2">
+                  Toppings: {item.toppings.join(", ")}
+                </p>
+              )}
+
+              {item.frosting && (
+                <p className="text-sm text-stone-500">
+                  Frosting: {item.frosting}
+                </p>
+              )}
+
+              <p className="font-black text-orange-600 mt-3">
+                ${Number(item.price).toFixed(2)}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  </div>
+)}
 
       <Hero />
       <FeaturedProducts addToCart={addToCart} />
