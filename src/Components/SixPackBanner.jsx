@@ -23,11 +23,11 @@ export default function SixPackBanner() {
               </p>
 
               <a
-                href="#builder"
-                className="inline-block bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-2xl font-bold transition"
-              >
-                Start Building
-              </a>
+  href="#custom-builder"
+  className="inline-block bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-2xl font-bold transition-all duration-300 ease-out hover:scale-105 active:scale-95"
+>
+  Start Building
+</a>
             </div>
 
             <div className="bg-stone-800 rounded-[2rem] p-8 border border-stone-700">

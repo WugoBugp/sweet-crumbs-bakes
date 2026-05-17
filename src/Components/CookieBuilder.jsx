@@ -134,9 +134,9 @@ const totalCalories = Math.round(
 )
   return (
     <section
-      id="builder"
-      className="py-24 px-6 bg-gradient-to-b from-orange-50 to-amber-100"
-    >
+  id="custom-builder"
+  className="py-24 px-6 bg-gradient-to-b from-orange-50 to-amber-100"
+>
       <div className="max-w-7xl mx-auto">
 
         <div className="text-center mb-16">

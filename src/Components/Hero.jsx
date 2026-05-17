@@ -23,14 +23,14 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="#menu"
-              className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-2xl font-bold transition hover:scale-105 active:scale-95 transition-transform duration-200"
+              className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-2xl font-bold transition-all duration-300 ease-out hover:scale-105 active:scale-95"
             >
               View Menu
             </a>
 
             <a
               href="#builder"
-              className="border-2 border-orange-300 hover:bg-orange-100 px-8 py-4 rounded-2xl font-bold transition hover:scale-105 active:scale-95 transition-transform duration-200"
+              className="border-2 border-orange-300 hover:bg-orange-100 px-8 py-4 rounded-2xl font-bold transition-all duration-300 ease-out hover:scale-105 active:scale-95"
             >
               Build Your Own Gourmet Cookie
             </a>
