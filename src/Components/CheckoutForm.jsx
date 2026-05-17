@@ -1,8 +1,10 @@
 // Components/CheckoutForm.jsx
 
 export default function CheckoutForm({ cartItems, setCartItems, setOrder, setShowCheckout }) {
-  const total = cartItems.reduce((sum, item) => sum + item.price, 0)
-
+  const total = cartItems.reduce(
+  (sum, item) => sum + Number(item.price) * item.quantity,
+  0
+)
   const handleSubmit = (e) => {
   e.preventDefault()
 
@@ -15,9 +17,11 @@ export default function CheckoutForm({ cartItems, setCartItems, setOrder, setSho
     pickupTime: formData.get("pickupTime"),
     instructions: formData.get("instructions"),
     items: cartItems,
-    total: cartItems.reduce((sum, item) => sum + Number(item.price), 0),
-  }
-
+   total: cartItems.reduce(
+  (sum, item) => sum + Number(item.price) * item.quantity,
+  0
+),
+}
   setOrder(newOrder)
   setCartItems([])
   setShowCheckout(false)
@@ -28,21 +32,22 @@ export default function CheckoutForm({ cartItems, setCartItems, setOrder, setSho
       <h2 className="text-3xl font-bold mb-4">Checkout</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          placeholder="Your name"
-          required
-          className="w-full border rounded-xl p-3"
-        />
-
-        <input
-          type="text"
-          placeholder="Email or phone number"
-          required
-          className="w-full border rounded-xl p-3"
-        />
-
        <input
+  type="text"
+  name="name"
+  placeholder="Your name"
+  required
+  className="w-full border rounded-xl p-3"
+/>
+
+     <input
+  type="text"
+  name="contact"
+  placeholder="Email or phone number"
+  required
+  className="w-full border rounded-xl p-3"
+/>
+      <input
   type="datetime-local"
   name="pickupTime"
   required
@@ -56,8 +61,8 @@ export default function CheckoutForm({ cartItems, setCartItems, setOrder, setSho
 />
 
         <div className="border-t pt-4">
-          <p className="font-bold">Items: {cartItems.length}</p>
-          <p className="font-bold">Total: ${total}</p>
+          <p className="font-bold">Items: {cartItems.reduce((sum, item) => sum + item.quantity, 0)}</p>
+          <p className="font-bold">Total: ${total.toFixed(2)}</p>
         </div>
 
         <button

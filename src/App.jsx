@@ -14,12 +14,47 @@ export default function App() {
   const [showCheckout, setShowCheckout] = useState(false)
   const [order, setOrder] = useState(null)
 
-  const addToCart = (item) => {
-    setCartItems((currentItems) => [...currentItems, item])
-  }
+ const addToCart = (item) => {
+  setCartItems((currentItems) => {
+    const existingItemIndex = currentItems.findIndex(
+      (cartItem) => cartItem.name === item.name
+    )
+
+    if (existingItemIndex !== -1) {
+      return currentItems.map((cartItem, index) =>
+        index === existingItemIndex
+          ? { ...cartItem, quantity: cartItem.quantity + 1 }
+          : cartItem
+      )
+    }
+
+    return [...currentItems, { ...item, quantity: 1 }]
+  })
+}
 const removeFromCart = (indexToRemove) => {
   setCartItems((currentItems) =>
     currentItems.filter((item, index) => index !== indexToRemove)
+  )
+}
+const increaseQuantity = (indexToUpdate) => {
+  setCartItems((currentItems) =>
+    currentItems.map((item, index) =>
+      index === indexToUpdate
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
+    )
+  )
+}
+
+const decreaseQuantity = (indexToUpdate) => {
+  setCartItems((currentItems) =>
+    currentItems
+      .map((item, index) =>
+        index === indexToUpdate
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      )
+      .filter((item) => item.quantity > 0)
   )
 }
   return (
@@ -28,7 +63,7 @@ const removeFromCart = (indexToRemove) => {
   onClick={() => setCartOpen(true)}
   className="fixed top-6 right-6 z-50 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-xl font-bold"
 >
-  Cart: {cartItems.length}
+  Cart: {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
 </button>
 {cartOpen && (
   <div
@@ -80,16 +115,36 @@ const removeFromCart = (indexToRemove) => {
                 </p>
               )}
 
-              <p className="font-black text-orange-600 mt-3">
-                ${Number(item.price).toFixed(2)}
-              </p>
+              <div className="mt-4 flex items-center justify-between">
+  <p className="font-black text-orange-600">
+    ${(Number(item.price) * item.quantity).toFixed(2)}
+  </p>
 
-              <button
-                onClick={() => removeFromCart(index)}
-                className="mt-3 w-full bg-red-100 hover:bg-red-200 text-red-700 py-2 rounded-xl font-bold transition"
-              >
-                Remove
-              </button>
+  <div className="flex items-center gap-3">
+    <button
+      onClick={() => decreaseQuantity(index)}
+      className="bg-stone-200 px-3 py-1 rounded-lg font-bold"
+    >
+      -
+    </button>
+
+    <span className="font-bold">{item.quantity}</span>
+
+    <button
+      onClick={() => increaseQuantity(index)}
+      className="bg-stone-200 px-3 py-1 rounded-lg font-bold"
+    >
+      +
+    </button>
+  </div>
+</div>
+
+<button
+  onClick={() => removeFromCart(index)}
+  className="mt-3 w-full bg-red-100 hover:bg-red-200 text-red-700 py-2 rounded-xl font-bold transition"
+>
+  Remove
+</button>
             </div>
           ))}
 
