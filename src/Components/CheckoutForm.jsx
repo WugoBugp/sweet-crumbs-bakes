@@ -28,7 +28,7 @@ export default function CheckoutForm({ cartItems, setCartItems, setOrder, setSho
 }
 
   return (
-    <div className="bg-white rounded-3xl shadow-xl p-6 max-w-xl mx-auto my-10">
+    <div className="bg-white rounded-3xl shadow-xl p-4 sm:p-6 max-w-xl mx-auto my-10 mx-4 sm:mx-auto">
       <h2 className="text-3xl font-bold mb-4">Checkout</h2>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -66,11 +66,11 @@ export default function CheckoutForm({ cartItems, setCartItems, setOrder, setSho
         </div>
 
         <button
-          type="submit"
-          className="w-full bg-stone-900 text-white py-3 rounded-xl font-bold"
-        >
-          Submit Order
-        </button>
+  type="submit"
+  className="w-full bg-stone-900 text-white py-3 rounded-xl font-bold hover:bg-stone-700 transition"
+>
+  Place Order
+</button>
       </form>
     </div>
   )

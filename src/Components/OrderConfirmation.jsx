@@ -15,7 +15,26 @@ export default function OrderConfirmation({ order, onBackToMenu }) {
         <p><strong>Order #:</strong> {order.orderNumber}</p>
         <p><strong>Pickup:</strong> {order.pickupTime}</p>
         <p><strong>Total:</strong> ${order.total.toFixed(2)}</p>
-      </div>
+
+<div className="mt-4">
+  <p className="font-bold mb-2">Items Ordered:</p>
+
+  {order.items.map((item, index) => (
+    <div
+      key={index}
+      className="flex justify-between border-b py-2 text-sm"
+    >
+      <span>
+        {item.quantity}x {item.name}
+      </span>
+
+      <span>
+        ${(Number(item.price) * item.quantity).toFixed(2)}
+      </span>
+    </div>
+  ))}
+</div>
+</div>
 
       <button
         onClick={onBackToMenu}

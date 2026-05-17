@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import CheckoutForm from "./Components/CheckoutForm"
 import Hero from "./Components/Hero"
 import FeaturedProducts from "./Components/FeaturedProducts"
@@ -9,10 +9,16 @@ import Footer from "./Components/Footer"
 import OrderConfirmation from "./Components/OrderConfirmation"
 
 export default function App() {
-  const [cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState(() => {
+  const savedCart = localStorage.getItem("cartItems")
+  return savedCart ? JSON.parse(savedCart) : []
+})
   const [cartOpen, setCartOpen] = useState(false)
   const [showCheckout, setShowCheckout] = useState(false)
   const [order, setOrder] = useState(null)
+  useEffect(() => {
+  localStorage.setItem("cartItems", JSON.stringify(cartItems))
+}, [cartItems])
 
  const addToCart = (item) => {
   setCartItems((currentItems) => {
@@ -59,12 +65,14 @@ const decreaseQuantity = (indexToUpdate) => {
 }
   return (
     <div className="bg-amber-50 min-h-screen">
-      <button
-  onClick={() => setCartOpen(true)}
-  className="fixed top-6 right-6 z-50 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-xl font-bold"
->
-  Cart: {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
-</button>
+      {!order && (
+  <button
+    onClick={() => setCartOpen(true)}
+    className="fixed top-6 right-6 z-50 bg-stone-900 text-white px-5 py-3 rounded-2xl shadow-xl font-bold"
+  >
+    Cart: {cartItems.reduce((sum, item) => sum + item.quantity, 0)}
+  </button>
+)}
 {cartOpen && (
   <div
     className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 transition-opacity duration-300"
@@ -78,7 +86,7 @@ const decreaseQuantity = (indexToUpdate) => {
       onClick={() => setCartOpen(false)}
     />
 
-    <div className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 p-6 overflow-y-auto transition-transform duration-300">
+    <div className="fixed top-0 right-0 h-full w-full sm:w-96 bg-white shadow-2xl z-50 p-6 overflow-y-auto transition-transform duration-300">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-3xl font-black">Your Cart</h2>
 
