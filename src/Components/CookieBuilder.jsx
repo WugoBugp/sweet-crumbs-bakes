@@ -68,11 +68,6 @@ const productTypes = [
       calories: 100,
     },
     {
-      name: "Caramel",
-      price: 1.5,
-      calories: 120,
-    },
-    {
       name: "Sprinkles",
       price: 0.5,
       calories: 40,
@@ -135,12 +130,12 @@ const totalCalories = Math.round(
   return (
     <section
   id="custom-builder"
-  className="py-24 px-6 bg-gradient-to-b from-orange-50 to-amber-100"
+  className="py-12 px-4 sm:py-24 sm:px-6 bg-gradient-to-b from-orange-50 to-amber-100"
 >
       <div className="max-w-7xl mx-auto">
 
         <div className="text-center mb-16">
-          <h2 className="text-6xl font-black text-stone-900 mb-4">
+          <h2 className="text-4xl sm:text-6xl font-black text-stone-900 mb-4">
             Build Your Own Gourmet Cookie
           </h2>
 
@@ -153,12 +148,12 @@ const totalCalories = Math.round(
         <div className="grid lg:grid-cols-2 gap-10">
 
           {/* Left Side */}
-          <div className="bg-white rounded-[2rem] p-10 shadow-2xl">
+          <div className="bg-white rounded-[2rem] p-5 sm:p-10 shadow-2xl">
 
             {/* Cookie Base */}
             <div className="mb-10">
                 <div className="mb-12">
-  <h3 className="text-3xl font-black mb-6">
+  <h3 className="text-3xl sm:text-4xl font-black mb-6">
     Choose Product Type
   </h3>
 
@@ -167,7 +162,7 @@ const totalCalories = Math.round(
       <button
         key={type.name}
         onClick={() => setSelectedProductType(type)}
-        className={`p-5 rounded-2xl border-2 text-left transition ${
+        className={`p-4 sm:p-5 rounded-2xl border-2 text-left transition ${
           selectedProductType.name === type.name
             ? "border-orange-600 bg-orange-100"
             : "border-stone-200 hover:border-orange-300"
@@ -186,7 +181,7 @@ const totalCalories = Math.round(
     ))}
   </div>
 </div>
-              <h3 className="text-3xl font-black mb-6">
+              <h3 className="text-3xl sm:text-4xl font-black mb-6">
                 Choose A Cookie Base
               </h3>
 
@@ -196,7 +191,7 @@ const totalCalories = Math.round(
                   <button
                     key={base.name}
                     onClick={() => setSelectedBase(base)}
-                    className={`p-5 rounded-2xl border-2 text-left transition ${
+                    className={`p-4 sm:p-5 rounded-2xl border-2 text-left transition ${
                       selectedBase.name === base.name
                         ? "border-orange-600 bg-orange-100"
                         : "border-stone-200 hover:border-orange-300"
@@ -207,7 +202,7 @@ const totalCalories = Math.round(
                     </p>
 
                     <p className="text-stone-600">
-                      ${base.price}
+                      ${(base.price * selectedProductType.priceMultiplier).toFixed(2)}
                     </p>
                   </button>
                 ))}
@@ -218,7 +213,7 @@ const totalCalories = Math.round(
             {/* Toppings */}
             <div className="mb-10">
 
-              <h3 className="text-3xl font-black mb-6">
+              <h3 className="text-3xl sm:text-4xl font-black mb-6">
                 Premium Toppings
               </h3>
 
@@ -228,7 +223,7 @@ const totalCalories = Math.round(
                   <button
                     key={topping.name}
                     onClick={() => toggleTopping(topping)}
-                    className={`p-5 rounded-2xl border-2 text-left transition ${
+                    className={`p-4 sm:p-5 rounded-2xl border-2 text-left transition ${
                       selectedToppings.some(
   (item) => item.name === topping.name
 )
@@ -241,7 +236,7 @@ const totalCalories = Math.round(
                     </p>
 
                     <p className="text-stone-600">
-                      +${topping.price}
+                      +${(topping.price * selectedProductType.priceMultiplier).toFixed(2)}
                     </p>
                   </button>
                 ))}
@@ -252,7 +247,7 @@ const totalCalories = Math.round(
             {/* Frosting */}
             <div>
 
-              <h3 className="text-3xl font-black mb-6">
+              <h3 className="text-3xl sm:text-4xl font-black mb-6">
                 Frosting
               </h3>
 
@@ -261,8 +256,12 @@ const totalCalories = Math.round(
                 {frostings.map((frosting) => (
                   <button
                     key={frosting.name}
-                    onClick={() => setSelectedFrosting(frosting)}
-                    className={`p-5 rounded-2xl border-2 text-left transition ${
+                    onClick={() =>
+  setSelectedFrosting((current) =>
+    current?.name === frosting.name ? null : frosting
+  )
+}
+                    className={`p-4 sm:p-5 rounded-2xl border-2 text-left transition ${
                       selectedFrosting?.name === frosting.name
                         ? "border-orange-600 bg-orange-100"
                         : "border-stone-200 hover:border-orange-300"
@@ -273,7 +272,7 @@ const totalCalories = Math.round(
                     </p>
 
                     <p className="text-stone-600">
-                      +${frosting.price}
+                      +${(frosting.price * selectedProductType.priceMultiplier).toFixed(2)}
                     </p>
                   </button>
                 ))}

@@ -1,4 +1,13 @@
+import { useState } from "react"
 export default function FeaturedProducts({ addToCart }) {
+  const [selectedProduct, setSelectedProduct] = useState(null)
+
+  const packOptions = [
+    { label: "Single", amount: 1 },
+    { label: "3 cookies", amount: 3 },
+    { label: "6-pack", amount: 6 },
+    { label: "Dozen", amount: 12 },
+  ]
   return (
     <section
       id="menu"
@@ -88,12 +97,12 @@ export default function FeaturedProducts({ addToCart }) {
 
              <button
   onClick={() =>
-    addToCart({
-      name: "Chocolate Chip Thins",
-      price: 1,
-      type: "Classic Cookie",
-    })
-  }
+  setSelectedProduct({
+    name: "Chocolate Chip Thins",
+    price: 1,
+    type: "Classic Cookie",
+  })
+}
   className="mt-auto w-full bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-2xl font-bold text-lg transition"
 >
   Add To Order
@@ -187,6 +196,51 @@ export default function FeaturedProducts({ addToCart }) {
 
         </div>
       </div>
+      {selectedProduct && (
+  <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center px-4">
+    <div className="bg-white rounded-[2rem] p-8 max-w-md w-full shadow-2xl">
+
+      <h2 className="text-3xl font-black mb-2">
+        Choose Pack Size
+      </h2>
+
+      <p className="text-stone-600 mb-6">
+        {selectedProduct.name}
+      </p>
+
+      <div className="grid gap-4">
+
+        {packOptions.map((option) => (
+          <button
+            key={option.label}
+            onClick={() => {
+             addToCart({
+  name: `${selectedProduct.name} - ${option.label}`,
+  type: selectedProduct.type,
+  quantity: option.amount,
+  price: selectedProduct.price * option.amount,
+})
+
+              setSelectedProduct(null)
+            }}
+            className="bg-orange-600 hover:bg-orange-700 text-white py-4 rounded-2xl font-black text-lg transition"
+          >
+            {option.label}
+          </button>
+        ))}
+
+      </div>
+
+      <button
+        onClick={() => setSelectedProduct(null)}
+        className="mt-5 text-stone-500 underline font-bold"
+      >
+        Cancel
+      </button>
+
+    </div>
+  </div>
+)}
     </section>
   )
 }
